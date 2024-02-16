@@ -1,0 +1,8 @@
+/* source keypos definitions */
+#include "../zmk-nodefree-config/keypos_def/keypos_34keys.h"
+
+/* define thumbs */
+#define THUMBS LH1 LH0 RH0 RH1
+
+/* source the main keymap */
+#include "base.keymap"
