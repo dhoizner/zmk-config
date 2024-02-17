@@ -1,1 +1,4 @@
 target/*.uf2
+target/*.bak
+target/*.bin
+.DS_Store
