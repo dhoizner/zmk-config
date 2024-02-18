@@ -4,10 +4,17 @@ manifest:
       url-base: https://github.com/zmkfirmware
     - name: urob
       url-base: https://github.com/urob
+    - name: kitchen
+      url-base: https://github.com/kitchen
   projects:
     - name: zmk
       remote: urob
       revision: main
       import: app/west.yml
+    - name: zmk-ahokore
+      remote: kitchen
+      repo-path: ahokore-zmk-config
+      clone-depth: 1
+      revision: kitchen/module-ify
   self:
     path: config
