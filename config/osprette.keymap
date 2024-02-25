@@ -1,0 +1,143 @@
+/*
+* Copyright (c) 2021 The ZMK Contributors
+*
+* SPDX-License-Identifier: MIT
+*/
+
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/bt.h>
+
+/* source keypos definitions */
+#include "../zmk-nodefree-config/keypos_def/keypos_34keys.h"
+#include "../zmk-nodefree-config/helper.h"
+
+#include "extra_keys.h"
+
+#define XXX &none
+#define ___ &trans
+
+#define QUICK_TAP_MS 175
+
+&lt {  // layer-tap config
+    flavor = "balanced";
+    tapping-term-ms = <200>;
+    quick-tap-ms = <QUICK_TAP_MS>;
+};
+
+#define MAIN 0
+#define SYM 1
+#define NAV 2
+#define BT 3
+/* Homerow mods */
+
+#define KEYS_L LT0 LT1 LT2 LT3 LT4 LM0 LM1 LM2 LM3 LM4 LB0 LB1 LB2 LB3 LB4  // left hand
+#define KEYS_R RT0 RT1 RT2 RT3 RT4 RM0 RM1 RM2 RM3 RM4 RB0 RB1 RB2 RB3 RB4  // right hand
+#define THUMBS LH1 LH0 RH0 RH1 // thumbs
+
+#define MAKE_HRM(NAME, HOLD, TAP, TRIGGER_POS) \
+    ZMK_BEHAVIOR(NAME, hold_tap, \
+        flavor = "balanced"; \
+        tapping-term-ms = <280>; \
+        quick-tap-ms = <QUICK_TAP_MS>; \
+        require-prior-idle-ms = <150>; \
+        bindings = <HOLD>, <TAP>; \
+        hold-trigger-key-positions = <TRIGGER_POS>; \
+        hold-trigger-on-release; \
+    )
+MAKE_HRM(hml, &kp, &kp, KEYS_R THUMBS)  // left-hand HRMs
+MAKE_HRM(hmr, &kp, &kp, KEYS_L THUMBS)  // right-hand HRMs
+
+/ {
+    combos {
+        compatible = "zmk,combos";
+
+        combo_esc {
+            timeout-ms = <100>;
+            key-positions = <21 22>;
+            bindings = <&kp ESC>;
+        };
+
+        combo_tab {
+            timeout-ms = <100>;
+            key-positions = <22 23>;
+            bindings = <&kp TAB>;
+        };
+
+        combo_minus {
+            timeout-ms = <100>;
+            key-positions = <26 27>;
+            bindings = <&kp MINUS>;
+        };
+
+        combo_underscore {
+            timeout-ms = <100>;
+            key-positions = <26 28>;
+            bindings = <&kp UNDERSCORE>;
+        };
+
+        combo_colon {
+            timeout-ms = <100>;
+            key-positions = <7 8>;
+            bindings = <&kp COLON>;
+        };
+
+        combo_semicolon {
+            timeout-ms = <100>;
+            key-positions = <6 8>;
+            bindings = <&kp SEMICOLON>;
+        };
+
+        combo_backslash {
+            timeout-ms = <100>;
+            key-positions = <27 28>;
+            bindings = <&kp BSLH>;
+        };
+
+        combo_grave {
+            timeout-ms = <100>;
+            key-positions = <8 9>;
+            bindings = <&kp GRAVE>;
+        };
+    };
+
+    keymap {
+        compatible = "zmk,keymap";
+
+        MAIN_layer {
+            bindings = <
+                            &kp L      &kp D       &kp C        &kp V            &kp Z     &kp Y      &kp O           &kp U
+          &kp B &kp N       &kp R      &kp T       &lt SYM S    &kp G            &kp P     &lt SYM H  &kp A           &kp E        &kp I        &kp COMMA
+                &hml LSHFT Q &hml LALT X &hml LCTRL M &hml LGUI W   &kp J            &kp K     &hmr RGUI F &hmr RCTRL SQT &hmr RALT SEMI &hmr RSHFT DOT
+                                                   &lt BT ENTER &lt NAV SPACE    &sk RSHFT &kp BSPC
+            >;
+        };
+
+        SYM_layer {
+            bindings = <
+                          &kp N7 &kp N8 &kp N9  &kp STAR     &kp DLLR  &kp LBRC &kp RBRC &kp HASH
+       &kp AMPS &kp EXCL  &kp N1 &kp N2 &kp N3  &kp EQUAL    &kp LT    &kp LPAR &kp RPAR &kp GT   &kp PIPE  &none
+                &kp CARET &kp N4 &kp N5 &kp N6  &kp PLUS     &kp TILDE &kp LBKT &kp RBKT &kp AT   &kp PRCNT
+                                        &kp DOT &kp N0       &trans    &none
+            >;
+        };
+
+        NAV_layer {
+            bindings = <
+                           &kp C_VOL_DN &kp C_VOL_UP &kp C_NEXT &kp C_PP           &none     &kp F7  &kp F8 &kp F9
+     &kp C_PREV &kp LEFT   &kp DOWN     &kp UP       &kp RIGHT  &kp LC(TAB)        &kp PSCRN &kp F1  &kp F2 &kp F3 &kp F10 &kp F12
+                &kp HOME   &kp PG_DN    &kp PG_UP    &kp END    &kp LS(LC(TAB))    &kp CAPS  &kp F4  &kp F5 &kp F6 &kp F11
+                                                     &none      &none              &trans    &kp DEL
+            >;
+        };
+
+        BT_layer {
+            bindings = <
+                      &none &none &none &none    &none &none        &none        &none
+          &none &none &none &none &none &none    &none &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &none
+                &none &none &none &none &none    &none &bt BT_CLR   &none        &none        &none
+                                  &none &none    &none &none
+            >;
+        };
+    };
+};

@@ -16,7 +16,9 @@ include:
   # - board: planck_rev6
   - board: corneish_zen_v1_left
   - board: corneish_zen_v1_right
-  # - board: ferris_rev02
+  - board: ferris_rev02
   - board: ahokore
+  - board: nice_nano_v2
+    shield: osprette
   # - board: glove80_lh
   # - board: glove80_rh

@@ -2,3 +2,8 @@ target/*.uf2
 target/*.bak
 target/*.bin
 .DS_Store
+.west
+modules
+zephyr
+zmk
+zmk-ahokore
