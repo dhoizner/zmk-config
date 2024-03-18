@@ -9,7 +9,7 @@
 #include <dt-bindings/zmk/bt.h>
 
 /* source keypos definitions */
-#include "../zmk-nodefree-config/keypos_def/keypos_34keys.h"
+#include "../zmk-nodefree-config/keypos_def/keypos_34keys_osprette.h"
 #include "../zmk-nodefree-config/helper.h"
 
 #include "extra_keys.h"
@@ -31,8 +31,8 @@
 #define BT 3
 /* Homerow mods */
 
-#define KEYS_L LT0 LT1 LT2 LT3 LT4 LM0 LM1 LM2 LM3 LM4 LB0 LB1 LB2 LB3 LB4  // left hand
-#define KEYS_R RT0 RT1 RT2 RT3 RT4 RM0 RM1 RM2 RM3 RM4 RB0 RB1 RB2 RB3 RB4  // right hand
+#define KEYS_L LT0 LT1 LT2 LT3 LM0 LM1 LM2 LM3 LM4 LM5 LB0 LB1 LB2 LB3 LB4  // left hand
+#define KEYS_R RT0 RT1 RT2 RT3 RM0 RM1 RM2 RM3 RM4 RM5 RB0 RB1 RB2 RB3 RB4  // right hand
 #define THUMBS LH1 LH0 RH0 RH1 // thumbs
 
 #define MAKE_HRM(NAME, HOLD, TAP, TRIGGER_POS) \
@@ -52,53 +52,18 @@ MAKE_HRM(hmr, &kp, &kp, KEYS_L THUMBS)  // right-hand HRMs
     combos {
         compatible = "zmk,combos";
 
-        combo_esc {
-            timeout-ms = <100>;
-            key-positions = <21 22>;
-            bindings = <&kp ESC>;
-        };
-
-        combo_tab {
-            timeout-ms = <100>;
-            key-positions = <22 23>;
-            bindings = <&kp TAB>;
-        };
-
-        combo_minus {
-            timeout-ms = <100>;
-            key-positions = <26 27>;
-            bindings = <&kp MINUS>;
-        };
-
-        combo_underscore {
-            timeout-ms = <100>;
-            key-positions = <26 28>;
-            bindings = <&kp UNDERSCORE>;
-        };
-
-        combo_colon {
-            timeout-ms = <100>;
-            key-positions = <7 8>;
-            bindings = <&kp COLON>;
-        };
-
-        combo_semicolon {
-            timeout-ms = <100>;
-            key-positions = <6 8>;
-            bindings = <&kp SEMICOLON>;
-        };
-
-        combo_backslash {
-            timeout-ms = <100>;
-            key-positions = <27 28>;
-            bindings = <&kp BSLH>;
-        };
-
         combo_grave {
             timeout-ms = <100>;
-            key-positions = <8 9>;
+            key-positions = <RB1 RB2>;
             bindings = <&kp GRAVE>;
         };
+
+				combo_dollar {
+            timeout-ms = <100>;
+            key-positions = <RB2 RB3>;
+            bindings = <&kp DOLLAR>;
+        };
+
     };
 
     keymap {
@@ -106,19 +71,19 @@ MAKE_HRM(hmr, &kp, &kp, KEYS_L THUMBS)  // right-hand HRMs
 
         MAIN_layer {
             bindings = <
-                            &kp L      &kp D       &kp C        &kp V            &kp Z     &kp Y      &kp O           &kp U
-          &kp B &kp N       &kp R      &kp T       &lt SYM S    &kp G            &kp P     &lt SYM H  &kp A           &kp E        &kp I        &kp COMMA
-                &hml LSHFT Q &hml LALT X &hml LCTRL M &hml LGUI W   &kp J            &kp K     &hmr RGUI F &hmr RCTRL SQT &hmr RALT SEMI &hmr RSHFT DOT
-                                                   &lt BT ENTER &lt NAV SPACE    &sk RSHFT &kp BSPC
+                             &kp W       &kp F        &kp P         &kp B            &kp J     &kp L       &kp U           &kp Y
+          &kp Q &kp A        &kp R       &kp S        &lt SYM T     &kp G            &kp M     &lt SYM N   &kp E           &kp I          &kp O          &kp SQT
+                &hml LSHFT Z &hml LALT X &hml LCTRL C &hml LGUI D   &kp V            &kp K     &hmr RGUI H &hmr RCTRL COMMA  &hmr RALT DOT &hmr RSHFT FSLH
+                                                      &lt BT ENTER  &lt NAV SPACE    &sk RSHFT &kp BSPC
             >;
         };
 
         SYM_layer {
             bindings = <
-                          &kp N7 &kp N8 &kp N9  &kp STAR     &kp DLLR  &kp LBRC &kp RBRC &kp HASH
-       &kp AMPS &kp EXCL  &kp N1 &kp N2 &kp N3  &kp EQUAL    &kp LT    &kp LPAR &kp RPAR &kp GT   &kp PIPE  &none
-                &kp CARET &kp N4 &kp N5 &kp N6  &kp PLUS     &kp TILDE &kp LBKT &kp RBKT &kp AT   &kp PRCNT
-                                        &kp DOT &kp N0       &trans    &none
+                             &kp GRAVE   &kp DQT      &kp RBRC      &kp QMARK        &kp LPAR   &kp LBKT &kp RPAR  &kp RBKT
+       &kp LBRC &trans    &kp EQUAL   &kp UNDER    &kp TILDE     &kp STAR         &none   &kp EXCL &kp AT    &kp HASH &kp SEMI  &none
+                &kp LT       &kp PIPE    &kp MINUS    &kp GT        &kp FSLH         &kp BSLH   &kp PLUS &kp AMPS  &none    &none
+                                                      &kp PERCENT   &kp COLON        &none      &none
             >;
         };
 
@@ -141,3 +106,5 @@ MAKE_HRM(hmr, &kp, &kp, KEYS_L THUMBS)  // right-hand HRMs
         };
     };
 };
+
+/* vim: set ft=c tw=174: */
