@@ -69,9 +69,6 @@
 MAKE_HRM(hml, &kp, &kp, KEYS_R THUMBS)  // left-hand HRMs
 MAKE_HRM(hmr, &kp, &kp, KEYS_L THUMBS)  // right-hand HRMs
 
-MAKE_HRM(hml_escape, &kp, &kp, KEYS_R THUMBS)  // used for HRM-combo
-MAKE_HRM(hmr_colon_lt, &kp, &colon_lt, KEYS_L THUMBS)    // "    "   "   "
-MAKE_HRM(hmr_rpar_gt, &kp, &rpar_gt, KEYS_L THUMBS)    // "    "   "   "
 MAKE_HRM(hmr_vsav, &kp, &vsav, KEYS_L THUMBS)    // "    "   "   "
 
 /* Nav cluster */
@@ -166,24 +163,6 @@ SIMPLE_MORPH(lpar_inner_morph, CTL, &kp LBKT, &kp LBRC)
 SIMPLE_MORPH(rpar_morph, SFT, &kp RPAR, &rpar_inner_morph)
 SIMPLE_MORPH(rpar_inner_morph, CTL, &kp RBKT, &kp RBRC)
 
-// tap: left/right parenthesis | shft + tap: less-than/greater-than
-SIMPLE_MORPH(colon_lt, SFT, &kp COLON, &kp LT)
-SIMPLE_MORPH(rpar_gt, SFT, &kp RPAR, &kp GT)
-
-// tap: space | shift + tap: dot -> space -> sticky shift | hold: activate layer
-ZMK_BEHAVIOR(lt_spc, hold_tap,
-    flavor = "balanced";
-    tapping-term-ms = <200>;
-    quick-tap-ms = <QUICK_TAP_MS>;
-    bindings = <&mo>, <&spc_morph>;
-)
-SIMPLE_MORPH(spc_morph, SFT, &kp SPACE, &dot_spc)
-ZMK_BEHAVIOR(dot_spc, macro,
-    wait-ms = <0>;
-    tap-ms = <5>;
-    bindings = <&kp DOT &kp SPACE &sk LSHFT>;
-)
-
 ZMK_BEHAVIOR(vsav, macro,
     wait-ms = <0>;
     tap-ms = <5>;
@@ -231,13 +210,13 @@ ZMK_CONDITIONAL_LAYER(sys, FN NUM, SYS)  // FN + NUM --> SYS
 
 ZMK_LAYER(base,
 //╭──────╮ ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮ ╭──────╮ ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮ ╭──────╮
-    X_LT     &kp Q         &kp W         &kp F         &kp P         &kp B           X_MT     &kp J         &kp L         &kp U         &kp Y         &dot_morph      X_RT
+    X_LT     &key_repeat   &kp W         &kp F         &kp P         &kp B           X_MT     &kp J         &kp L         &kp U         &kp Y         &dot_morph      X_RT
 //├──────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├──────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├──────┤
     X_LM     &hml LALT A   &hml LGUI R   &hml LCTRL S  &hml LSHFT T  &hml RGUI G     X_MM     &hmr RGUI M   &hmr RSHFT N  &hmr LCTRL E  &hmr LGUI I   &hmr LALT O     X_RM
 //├──────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├──────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├──────┤
-    X_LB     &kp Z         &kp X         &kp C         &kp D         &kp V           X_MB     &kp K         &kp H         &lpar_morph   &rpar_morph   &qexcl          X_RB
+    X_LB     &comma_morph  &kp X         &kp C         &kp D         &kp V           X_MB     &kp K         &kp H         &kp A      &kp RPAR      &qexcl          X_RB
 //├──────┤ ╰─────────────┼─────────────┴─────────────┼─────────────┼─────────────┤ ├──────┤ ├─────────────┼─────────────┼─────────────┴───────────────────────────╯ ├──────┤
-    X_LH                                               &lt_spc NAV 0 &lt FN RET      X_MH     SMART_NUM     &smart_shft                                               X_RH
+    X_LH                                               &lt NAV SPACE     &lt FN RET      X_MH     SMART_NUM     &smart_shft                                               X_RH
 //╰──────╯                                           ╰─────────────┴─────────────╯ ╰──────╯ ╰─────────────┴─────────────╯                                           ╰──────╯
 )
 

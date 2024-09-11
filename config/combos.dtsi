@@ -16,15 +16,15 @@
 
 // make homerow combos tap-only (so HRMs can be chorded instantaneously)
 #define HRC_TAB    &hml         LG(LCTRL) TAB
-#define HRC_ESCAPE &hml_escape  LS(LCTRL) ESCAPE
+#define HRC_ESCAPE &hml  LS(LCTRL) ESCAPE
 #define HRC_DQT &hml  LS(LGUI) DQT
-#define HRC_COLON   &hmr_colon_lt RS(LCTRL) 0
-#define HRC_RPAR   &hmr_rpar_gt LG(LCTRL) 0
+// #define HRC_COLON   &hmr_colon_lt RS(LCTRL) 0
 #define HRC_ENTER &hmr LC(LGUI) ENTER
 #define HRC_SQT &hmr LS(LGUI) SQT
 
 /* Horizontal combos - left hand */
-/* ZMK_COMBO(topq,   &kp Q,    LT4 LT3,     DEF NAV NUM, COMBO_TERM_FAST) */
+/*
+ZMK_COMBO(topq,   &kp Q,    LT4 LT3,     DEF NAV NUM, COMBO_TERM_FAST)
 ZMK_COMBO(topqu,   &q_u,    LT3 LT2,     DEF NAV NUM, COMBO_TERM_FAST)
 ZMK_COMBO(topz,   &kp Z,    LT2 LT1,     DEF NAV NUM, COMBO_TERM_FAST)
 ZMK_COMBO(mouse, &smart_mouse,  LT3 LT1,     DEF NAV NUM, COMBO_TERM_FAST)
@@ -36,12 +36,13 @@ ZMK_COMBO(dqt,HRC_DQT,    LM3 LM1,     DEF NAV NUM, COMBO_TERM_FAST)
 ZMK_COMBO(cut,   &kp LC(X),     LB3 LB1,     DEF NAV NUM, COMBO_TERM_FAST)
 ZMK_COMBO(copy,  &kp LC(INS),   LB3 LB2,     DEF NAV NUM, COMBO_TERM_FAST)
 ZMK_COMBO(paste, &kp LS(INS),   LB2 LB1,     DEF NAV NUM, COMBO_TERM_FAST)
+*/
 
 /* Horizontal combos - right hand */
 ZMK_COMBO(equal,  &kp EQUAL,      RT1 RT2,     DEF NAV NUM, COMBO_TERM_FAST)
 ZMK_COMBO(bspc,   &kp BSPC,       RT2 RT3,     DEF NAV NUM, COMBO_TERM_FAST)
 
-ZMK_COMBO(colon,  HRC_COLON,      RM1 RM2,     DEF     NUM, COMBO_TERM_FAST)
+ZMK_COMBO(colon,  &kp COLON,      RM1 RM2,     DEF     NUM, COMBO_TERM_FAST)
 ZMK_COMBO(enter,  HRC_ENTER,      RM2 RM3,     DEF     NUM, COMBO_TERM_FAST)
 ZMK_COMBO(sqt,  HRC_SQT,      RM1 RM3,     DEF     NUM, COMBO_TERM_FAST)
 ZMK_COMBO(lt,    &kp LT,        RM1 RM2,         NAV    , COMBO_TERM_FAST)
