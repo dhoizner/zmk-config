@@ -1,20 +1,37 @@
 manifest:
+  defaults:
+    remote: urob
+
   remotes:
-    - name: zmkfirmware
+    - name: upstream
       url-base: https://github.com/zmkfirmware
     - name: urob
       url-base: https://github.com/urob
     - name: kitchen
       url-base: https://github.com/kitchen
   projects:
-    - name: zmk
-      remote: urob
+    - name: zmk-helpers
       revision: main
-      import: app/west.yml
+      path: modules/helpers
+    - name: zmk-auto-layer
+      revision: main
+      path: modules/auto-layer
+    - name: zmk-tri-state
+      revision: main
+      path: modules/tri-state
+
+    - name: zmk
+      revision: going-modular
+      path: .
+      import:
+        file: app/west.yml
+        path-prefix: zmk
+
     - name: zmk-ahokore
       remote: kitchen
       repo-path: ahokore-zmk-config
       clone-depth: 1
       revision: kitchen/module-ify
+
   self:
     path: config

@@ -7,3 +7,5 @@ modules
 zephyr
 zmk
 zmk-ahokore
+
+.zmk/

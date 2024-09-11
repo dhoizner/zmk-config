@@ -33,3 +33,4 @@ build-osprette: (build 'nice_nano_v2' 'osprette')
 build-corneish-zen-left: (build 'corneish_zen_v1_left')
 build-corneish-zen-right: (build 'corneish_zen_v1_right')
 build-corneish-zen: build-corneish-zen-left build-corneish-zen-right
+build-zaphod: (build 'zaphod')
